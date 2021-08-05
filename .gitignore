@@ -137,4 +137,4 @@ thumb
 sketch
 
 ### other ###
-server/config/*
+server/config/*.json
