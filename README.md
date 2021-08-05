@@ -47,6 +47,6 @@ To run this application you must have [NodeJS](https://nodejs.org/en/download/) 
 
 ## Screenshots
 
-![Home](https://github.com/aauga/meetjohn/blob/main/images/1.png?raw=true)
-![Details](https://github.com/aauga/meetjohn/blob/main/images/2.png?raw=true)
-![History](https://github.com/aauga/meetjohn/blob/main/images/3.png?raw=true)
+![Home](https://github.com/aauga/meetjohn/blob/main/screenshots/1.png?raw=true)
+![History](https://github.com/aauga/meetjohn/blob/main/screenshots/2.png?raw=true)
+![Details](https://github.com/aauga/meetjohn/blob/main/screenshots/3.png?raw=true)
