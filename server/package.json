@@ -1,0 +1,27 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "A web application which can process images and identify their contents.",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app",
+    "dev": "nodemon app"
+  },
+  "author": "Adomas Auga",
+  "license": "ISC",
+  "dependencies": {
+    "@google-cloud/datastore": "^6.4.7",
+    "@google-cloud/storage": "^5.11.1",
+    "@google-cloud/vision": "^2.3.7",
+    "axios": "^0.21.1",
+    "cors": "^2.8.5",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "image-hash": "^4.0.1",
+    "method-override": "^3.0.0",
+    "sharp": "^0.28.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
