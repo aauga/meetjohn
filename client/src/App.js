@@ -1,5 +1,5 @@
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Navigation, Home, History, Details, Error } from "./components";
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { Navigation, Home, History, Details, Error404 } from "./components";
 import { Container } from 'react-bootstrap';
 
 export default function App() {
@@ -8,10 +8,12 @@ export default function App() {
 		<Navigation/>
 		<Container>
 			<Router>
-				<Route exact path='/' component={Home} />
-				<Route path='/history' component={History} />
-				<Route path='/details/:hash' component={Details} />
-				<Route path='/error' component={Error} />
+				<Switch>
+					<Route exact path='/' component={Home} />
+					<Route path='/history' component={History} />
+					<Route path='/details/:hash' component={Details} />
+					<Route component={Error404} />
+				</Switch>
 			</Router>
 		</Container>
 		</>

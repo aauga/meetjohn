@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import axios from 'axios';
 
-import { Error, Spinner } from '../';
+import { Error, Error404, Spinner } from '../';
 import Card from './Card';
 
 export default class Details extends Component {
@@ -55,7 +55,7 @@ export default class Details extends Component {
         }
         else if(data === '')
         {
-            return <h2 className="text-center">There is no such image.</h2>;
+            return <Error404/>;
         }
 
         return (
