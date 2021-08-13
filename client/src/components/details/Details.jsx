@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Moment from 'react-moment';
-import { ListGroup, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
-import { Error } from '../';
+import { ListGroup, Button, Card, Row, Col } from 'react-bootstrap';
+import { Error, Spinner } from '../';
 
 export default class Details extends Component {
     constructor(props)
@@ -35,7 +35,7 @@ export default class Details extends Component {
             this.props.history.push('/history');
         } catch (error) {
             console.error(error);
-            this.props.history.push("/error");
+            this.setState({ error: true });
         }
     }
 
@@ -48,7 +48,7 @@ export default class Details extends Component {
 
         if(Object.keys(data).length === 0 && data !== '')
         {
-            return(<Spinner animation="border" style={{position: 'fixed', left: '50%'}}/>);
+            return(<Spinner/>);
         }
         else if(data === '')
         {
