@@ -1,39 +1,35 @@
 import React, { Component } from 'react';
+
 import axios from 'axios';
-import Moment from 'react-moment';
-import { ListGroup, Button, Card, Row, Col } from 'react-bootstrap';
+
 import { Error, Spinner } from '../';
-import ObjectList from './ObjectList';
+import Card from './Card';
 
 export default class Details extends Component {
     constructor(props)
     {
         super(props);
+
         this.state = {
             hash: this.props.match.params.hash,
             data: {},
             error: false
-        }
+        };
+
+        // this is for changing state from other components
+        this.errorHandling = this.errorHandling.bind(this);
+    }
+
+    errorHandling() {
+        this.setState({ error: true });
     }
 
     async componentDidMount() {
         document.title = 'MeetJohn - Details';
         
         try {
-            const imgData = await axios.get(`http://localhost:5000/api/details/${this.state.hash}`);
-            this.setState({ data: imgData.data });
-        } catch (error) {
-            console.error(error);
-            this.setState({ error: true });
-        }
-    }
-
-    handleSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            await axios.delete(`http://localhost:5000/api/details/${this.state.hash}?_method=DELETE`);
-            this.props.history.push('/history');
+            const response = await axios.get(`http://localhost:5000/api/details/${this.state.hash}`);
+            this.setState({ data: response.data });
         } catch (error) {
             console.error(error);
             this.setState({ error: true });
@@ -45,9 +41,14 @@ export default class Details extends Component {
             return(<Error/>);
         }
 
-        const data = this.state.data;
+        const stateReference = {
+            state: this.state,
+            errorHandling: this.errorHandling
+        }
 
-        // Check if data is loaded
+        const { data } = this.state;
+
+        // Check if data was loaded
         if(Object.keys(data).length === 0 && data !== '')
         {
             return <Spinner/>;
@@ -57,37 +58,10 @@ export default class Details extends Component {
             return <h2 className="text-center">There is no such image.</h2>;
         }
 
-        const { url, objects, created } = data;
-
         return (
             <>
             <h2 className="mb-3 text-center">Details</h2>
-
-            <Card>
-                <Row className="g-0">
-                    <Col md={4}>
-                        <Card.Img variant="top" src={url} style={{height: '100%'}} />
-                    </Col>
-                    
-                    <Col md={8}>
-                        <Card.Body>
-                            <Card.Title>Objects</Card.Title>
-                            <ListGroup variant="flush">
-                                <ObjectList objects={objects}/>
-                            </ListGroup>
-
-                            <form onSubmit={this.handleSubmit}>
-                                <Button variant="danger" type="submit" className="mt-2" style={{width: '100%'}}>Delete</Button>
-                            </form>
-                        </Card.Body>
-                        <Card.Footer>
-                            <small className="text-muted">
-                                Uploaded <Moment format="YYYY-MM-DD HH:mm">{created}</Moment>
-                            </small>
-                        </Card.Footer>
-                    </Col>
-                </Row>
-            </Card>
+            <Card passedData={stateReference} />
             </>
         );
     }

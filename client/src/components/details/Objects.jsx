@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { ListGroup } from 'react-bootstrap';
 
-export default class ObjectList extends Component {
+export default class Objects extends Component {
     render() {
-        const { objects } = this.props;
+        const objects = this.props.passedData;
 
         if(!objects)
         {
