@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { ListGroup, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
 import axios from 'axios';
 import Moment from 'react-moment';
+import { ListGroup, Button, Card, Row, Col, Spinner } from 'react-bootstrap';
+import { Error } from '../';
 
 export default class Details extends Component {
     constructor(props)
@@ -10,6 +11,7 @@ export default class Details extends Component {
         this.state = {
             hash: this.props.match.params.hash,
             data: {},
+            error: false
         }
     }
 
@@ -21,6 +23,7 @@ export default class Details extends Component {
             this.setState({ data: imgData.data });
         } catch (error) {
             console.error(error);
+            this.setState({ error: true });
         }
     }
 
@@ -36,8 +39,11 @@ export default class Details extends Component {
         }
     }
 
-    render()
-    {
+    render() {
+        if(this.state.error) {
+            return(<Error/>);
+        }
+
         const data = this.state.data;
 
         if(Object.keys(data).length === 0 && data !== '')
