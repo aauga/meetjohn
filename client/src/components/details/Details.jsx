@@ -48,11 +48,11 @@ export default class Details extends Component {
 
         if(Object.keys(data).length === 0 && data !== '')
         {
-            return(<Spinner/>);
+            return <Spinner/>;
         }
         else if(data === '')
         {
-            return(<h2 className="text-center">There is no such image.</h2>);
+            return <h2 className="text-center">There is no such image.</h2>;
         }
 
         const { url, objects, created } = this.state.data;
