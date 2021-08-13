@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Moment from 'react-moment';
 import { Card, Button, Col } from 'react-bootstrap';
-import './styles.css';
+import '../styles.css';
 
 export default class ImageCard extends Component {
     constructor(props)

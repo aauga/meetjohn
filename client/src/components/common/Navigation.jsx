@@ -8,8 +8,12 @@ export default function Navigation() {
                 <Container>
                     <Navbar.Brand href="/">MeetJohn</Navbar.Brand>
                     <Nav className="me-auto">
-                        <Nav.Link href="/">Home</Nav.Link>
-                        <Nav.Link href="/history">History</Nav.Link>
+                        <Nav.Item>
+                            <Nav.Link href="/">Home</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                            <Nav.Link href="/history">History</Nav.Link>
+                        </Nav.Item>
                     </Nav>
                 </Container>
             </Navbar>
