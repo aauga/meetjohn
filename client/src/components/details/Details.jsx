@@ -3,6 +3,7 @@ import axios from 'axios';
 import Moment from 'react-moment';
 import { ListGroup, Button, Card, Row, Col } from 'react-bootstrap';
 import { Error, Spinner } from '../';
+import ObjectList from './ObjectList';
 
 export default class Details extends Component {
     constructor(props)
@@ -46,6 +47,7 @@ export default class Details extends Component {
 
         const data = this.state.data;
 
+        // Check if data is loaded
         if(Object.keys(data).length === 0 && data !== '')
         {
             return <Spinner/>;
@@ -55,20 +57,7 @@ export default class Details extends Component {
             return <h2 className="text-center">There is no such image.</h2>;
         }
 
-        const { url, objects, created } = this.state.data;
-        
-        function ObjectList() {
-            if(!objects)
-            {
-                return(<><ListGroup.Item>No objects detected</ListGroup.Item></>);
-            }
-
-            const list = objects.map(object =>
-                <ListGroup.Item key={object.name}>{object.name} was detected {object.times} times</ListGroup.Item>
-            );
-
-            return (<>{list}</>);
-        }
+        const { url, objects, created } = data;
 
         return (
             <>
@@ -84,7 +73,7 @@ export default class Details extends Component {
                         <Card.Body>
                             <Card.Title>Objects</Card.Title>
                             <ListGroup variant="flush">
-                                <ObjectList/>
+                                <ObjectList objects={objects}/>
                             </ListGroup>
 
                             <form onSubmit={this.handleSubmit}>
