@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import { Card, Row, Col, ListGroup } from 'react-bootstrap';
 
+import { CardFooter } from '../';
 import Objects from './Objects';
-import CardFooter from './CardFooter';
 import CardForm from './CardForm';
 
 const Image = styled(Card.Img)`

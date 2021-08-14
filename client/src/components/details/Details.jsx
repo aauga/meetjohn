@@ -15,8 +15,7 @@ export default class Details extends Component {
             data: {},
             error: false
         };
-
-        // this is for changing state from other components
+        
         this.errorHandling = this.errorHandling.bind(this);
     }
 

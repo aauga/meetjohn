@@ -1,14 +1,17 @@
 import React, { Component } from 'react';
-import { Row, Spinner } from 'react-bootstrap';
-import Card from './Card.jsx';
+
 import axios from 'axios';
+import { Error, Spinner } from '../';
+
+import CardList from './CardList';
 
 export default class History extends Component {
     constructor()
     {
         super();
         this.state = {
-            images: []
+            images: [],
+            error: false
         };
     }
 
@@ -20,34 +23,34 @@ export default class History extends Component {
             this.setState({ images: imgData.data });
         } catch (error) {
             console.error(error);
-            this.props.history.push("/error");
+            this.setState({ error: true });
         }
     }
 
     render()
     {
+        if(this.state.error) {
+            return(<Error/>);
+        }
+
         const data = this.state.images;
 
+        // Check if data was loaded
         if(Object.keys(data).length === 0 && data !== '')
         {
-            return(<Spinner style={{position: 'fixed', left: '50%'}} animation="border" />);
+            return <Spinner/>;
         }
         else if(data === '')
         {
-            return(<h2 className="text-center">There are no images.</h2>);
+            return <h2 className="text-center">There are no images yet.</h2>;
         }
 
         const { images } = this.state;
 
-        function CardList() {
-            const list = images.map(image => <Card key={image.hash} data={image}/>);
-            return (<Row xs={1} md={2} lg={3} className="justify-content-center">{list}</Row>);
-        }
-
         return (
             <>
             <h2 className="text-center">History</h2>
-            <CardList/>
+            <CardList passedData={images} />
             </>
         );
     }

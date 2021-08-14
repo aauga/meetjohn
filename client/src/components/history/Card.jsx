@@ -1,35 +1,48 @@
 import React, { Component } from 'react';
-import Moment from 'react-moment';
+
+import styled from 'styled-components';
 import { Card, Button, Col } from 'react-bootstrap';
-import '../styles.css';
+
+import { CardFooter } from '../';
+
+const StyledCard = styled(Card)`
+    width: 20rem;
+`;
+
+const StyledImage = styled(Card.Img)`
+    height: 250px;
+`;
+
+const StyledColumn = styled(Col)`
+    display: flex;
+    justify-content: center;
+    padding: 0 !important;
+`;
+
+const StyledButton = styled(Button)`
+    width: 100%;
+    border-radius: 0 0 0.25rem 0.25rem;
+`;
 
 export default class ImageCard extends Component {
-    constructor(props)
-    {
-        super(props);
-        this.state = {
-            data: props.data,
-        }
-    }
-
     render()
     {
-        const { data } = this.state;
+        const { hash, url, created } = this.props.passedData;
 
         return (
-            <Col className="mt-4 col-display">
-                <Card style={{ width: '20rem' }}>
-                    <Card.Img variant="top" src={data.url} style={{ height:'250px' }} />
-                    <Card.Footer>
-                        <small className="text-muted">Uploaded <Moment format="YYYY-MM-DD HH:mm">{data.created}</Moment></small>
-                    </Card.Footer>
+            <StyledColumn className="mt-4">
+                <StyledCard>
+                    <StyledImage variant="top" src={url} />
+
+                    <CardFooter passedData={created} />
+
                     <Card.Body className="p-0">
-                        <form action={`/details/${data.hash}`}>
-                            <Button type="submit" variant="primary" className="btn-full-width">Details</Button>
+                        <form action={`/details/${hash}`}>
+                            <StyledButton type="submit" variant="primary">Details</StyledButton>
                         </form>
                     </Card.Body>
-                </Card>
-            </Col>
+                </StyledCard>
+            </StyledColumn>
         );
     }
 }
