@@ -15,7 +15,7 @@ export default class CardComponent extends Component {
     render() {
         const stateReference = {
             hash: this.props.passedData.state.hash,
-            error: this.props.passedData.errorHandling
+            error: this.props.passedData.handleError
         };
 
         const { url, objects, created } = this.props.passedData.state.data;

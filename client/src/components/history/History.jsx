@@ -19,8 +19,8 @@ export default class History extends Component {
         document.title = 'MeetJohn - History';
         
         try {
-            const imgData = await axios.get('http://localhost:5000/api/history');
-            this.setState({ images: imgData.data });
+            const response = await axios.get('http://localhost:5000/api/history');
+            this.setState({ images: response.data });
         } catch (error) {
             console.error(error);
             this.setState({ error: true });

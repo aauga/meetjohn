@@ -16,10 +16,10 @@ export default class Details extends Component {
             error: false
         };
         
-        this.errorHandling = this.errorHandling.bind(this);
+        this.handleError = this.handleError.bind(this);
     }
 
-    errorHandling() {
+    handleError() {
         this.setState({ error: true });
     }
 
@@ -42,7 +42,7 @@ export default class Details extends Component {
 
         const stateReference = {
             state: this.state,
-            errorHandling: this.errorHandling
+            handleError: this.handleError
         }
 
         const { data } = this.state;
